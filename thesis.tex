@@ -1,0 +1,159 @@
+% !TeX Live version = 2021
+\documentclass[
+%%%%% Styles and Sizes
+%10pt,
+%11pt,
+12pt,
+fancyheadings, % headings with seplines and logo
+%
+%%%%% Printing, Color and Binding
+a4paper, 
+%a5paper,
+%twoside, % single sided printout
+%oneside, % duplex printout (default)
+%% binding correction is used to compensate for the paper lost during binding
+%% of the document
+%BCOR=0.7cm, % binding correction
+%nobcorignoretitle, % do not ignore BCOR for title page
+%% the following two options only concern the graphics included by the document
+%% class
+%grayscaletitle, % keep the title in grayscale
+%grayscalebody, % keep the rest of the document in grayscale
+%
+%%%%% expert options: your mileage may vary
+%baseclass=..., % special option to use a different document baseclass
+]{tuhhreprt}
+
+
+% Information for the Titlepage
+\author{Ali Bigdeli Satar}
+\title{Stochastic dominance for super heavy-tailed random variables}
+\date{\today}
+\subject{\bachelorthesisname} %für Master-Arbeit \masterthesisname
+\professor{Professor}
+\advisor{Prof. Dr. Matthias Schulte}
+\matriculationnumber{21967856}
+
+%Für Englisch diese Zeile auskommentieren.
+\usepackage{ngerman}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsthm}
+\usepackage{amsopn}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[boxed,linesnumbered,algochapter]{algorithm2e} 
+
+\usepackage{enumitem}
+
+%Es können beliebige verschiedene Theorem-Umgebungen auf diese Weise erzeugt werden. Bei Bedarf können die Namen geändert werden.
+%[chapter] sorgt dafür, dass die Theoreme etc. pro Kapitel gezählt werden (also Theorem 1.1, 1.2 usw. im ersten Kapitel und Theorem 2.1, 2.2 usw. im zweiten Kapitel). Zur durchgängigen Nummerierung (Theorem 1, Theorem 2 etc.) über Kapitel hinweg, kann [chapter] entfernt werden.
+%[definition] sorgt dafür, dass alle Umgebungen den gleichen Counter wie definition benutzen (Theorem 1.1, Lemma 1.2 statt Theorem 1.1, Lemma 1.1)
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{corollary}[definition]{Corollary}
+\newtheorem{conjecture}[definition]{Conjecture}
+
+\providecaptionname{ngerman}{\proofname}{Beweis}
+
+% Font and Fontencoding Magic
+% FAQ: 
+% http://tex.stackexchange.com/questions/664/why-should-i-use-usepackaget1fontenc
+% http://en.wikipedia.org/wiki/Computer_Modern
+% http://tex.stackexchange.com/questions/1390/latin-modern-vs-cm-super
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+\begin{document}
+\frontmatter
+\maketitle
+
+\chapter*{Eidesstattliche Erklärung}
+
+Hiermit versichere ich an Eides statt, dass die vorliegende Arbeit selbstständig verfasst wurde und keine anderen als die angegebenen Quellen und Hilfsmittel benutzt wurden.
+
+\vspace{2cm}
+
+\begin{tabbing}
+Hamburg, am \today \hspace{5cm} \= Ali Bigdeli Satar
+\end{tabbing}
+
+\clearpage
+
+\tableofcontents
+
+\listoffigures{}
+\mainmatter
+%Hier kommt der Text hin
+\chapter{Einleitung}
+
+Verteilungen mit unendlichem Erwartungswert sind im Bereich des Bank- und Versicherungswesens allgegenwärtig. Sie erweisen sich insbesondere als nützlich zur Modellierung von katastrophalen Verlusten (Ibragimov et al., 2009), operationellen Risiken (Moscadelli, 2004), Kosten von Cyber-Risiken (Eling und Wirfs, 2019) sowie finanziellen Erträgen aus technologischen Innovationen (Silverberg und Verspagen, 2007); eine Übersicht empirischer Beispiele für solche Verteilungen findet sich zudem bei Chen et al. (2024b)\cite{ChenShneer2024}.
+
+
+\chapter{Grundlagen}
+
+\makeatletter
+\renewcommand{\thesubsection}{\thechapter.\arabic{subsection}}
+\makeatother
+In diesem Kapitel werden einige wichtige statistische Konzepte eingeführt, um eine Grundlage für das Verständnis der folgenden Kapitel zu schaffen.
+
+\subsection{Subadditive Funktionen}
+
+Eine Funktion \( f \) auf dem Intervall \( (0, \infty) \) heißt subadditiv, wenn für alle \( x, y > 0 \) gilt:
+\[
+f(x + y) \leq f(x) + f(y).
+\]
+Ist die Ungleichung strikt, d.\,h.
+\[
+f(x + y) < f(x) + f(y),
+\]
+so nennt man \( f \) streng subadditiv\cite{ChenShneer2024}.
+\subsection{Essentielle Infimum und Supremum}
+
+Für eine Zufallsvariable \( X \sim F \) bezeichnen wir mit \textit{ess-inf} \( X \) (bzw. \textit{ess-inf} \( F \)) das essentielle Infimum und mit \textit{ess-sup} \( X \) (bzw. \textit{ess-sup} \( F \)) das essentielle Supremum von \( X \)\cite{ChenShneer2024}.
+
+\subsection{Standard-Simplex}
+Bezeichne mit \(\Delta^n\) das Standardsimplex, also
+\[
+\Delta^n = \left\{ \bar{\theta} \in [0, 1]^n : \sum_{i=1}^n \theta_i = 1 \right\},
+\]
+wobei wir die Notation \(\bar{\theta}\) für einen Vektor \((\theta_1, \ldots, \theta_n)\) verwenden. Außerdem steht \([n]\) für die Indexmenge \(\{1, \ldots, n\}\)\cite{ChenShneer2024}.
+\subsection{Stochastische Dominanz}
+\begin{definition}
+Eine Zufallsvariable \( X \) heißt stochastisch kleiner als (oder stochastisch dominiert durch) eine Zufallsvariable \( Y \), wenn
+\[
+P(X \leq x) \geq P(Y \leq x) \quad \text{für alle } x \in \mathbb{R}\cite{ChenShneer2024}.
+\]
+\end{definition}
+
+\chapter{Einige Beobachtungen zur stochastischen Dominanz}
+Im gesamten Papier arbeiten wir mit Zufallsvariablen, die fast sicher nicht-negativ sind.  
+Der Hauptfokus des Papiers liegt auf der Untersuchung von Zufallsvariablen \( X \), für die gilt:  
+\begin{equation}
+X \leq_{\text{st}} \theta_1 X_1 + \cdots + \theta_n X_n.
+\tag{1}
+\end{equation}
+
+
+\chapter{Super heavy-tailed Verteilungen und stochastische Dominanz}
+In diesem Abschnitt führen wir eine Klasse von Verteilungen ein, die wir als super-schwerschwänzig bezeichnen. Anschließend zeigen wir, dass alle diese Verteilungen die Eigenschaft (1) erfüllen.
+
+
+
+
+
+
+
+
+
+
+
+
+\backmatter
+\addcontentsline{toc}{chapter}{Literaturverzeichnis}
+\bibliographystyle{plain}
+\bibliography{literatur}
+\end{document}
