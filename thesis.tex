@@ -89,6 +89,8 @@ Hamburg, am \today \hspace{5cm} \= Ali Bigdeli Satar
 \mainmatter
 %Hier kommt der Text hin
 \chapter{Einleitung}
+Angenommen, die größte Person, die Sie je gesehen haben, war \(2\,\mathrm{m}\) (6 Fuß 8 Zoll) groß; vielleicht treffen Sie eines Tages eine noch größere Person. Wie groß denken Sie, wird diese Person sein – vielleicht \(2{,}1\,\mathrm{m}\) (7 Fuß)? Wie wahrscheinlich ist es, dass die erste Person, die Sie treffen und die größer als \(2\,\mathrm{m}\) ist, mehr als doppelt so groß ist – also \(4{,}06\,\mathrm{m}\) (13 Fuß 4 Zoll)? Diese Wahrscheinlichkeit ist sicherlich verschwindend gering. Die größte Person der Welt, Bao Xishun aus der Inneren Mongolei in China, ist \(2{,}36\,\mathrm{m}\) (7 Fuß 9 Zoll) groß. Vor 2005 war der teuerste Hurrikan in den USA der Hurrikan Andrew (1992) mit Schäden in Höhe von 41{,}5 Milliarden USD (2011). Hurrikan Katrina stellte den nächsten Rekord auf – mit Schäden in Höhe von 91 Milliarden USD (2011). \cite[Abschnitt 1.1]{cooke2011heavy}
+
 
 Verteilungen mit unendlichem Erwartungswert sind im Bereich des Bank- und Versicherungswesens allgegenwärtig. Sie erweisen sich insbesondere als nützlich zur Modellierung von katastrophalen Verlusten (Ibragimov et al., 2009), operationellen Risiken (Moscadelli, 2004), Kosten von Cyber-Risiken (Eling und Wirfs, 2019) sowie finanziellen Erträgen aus technologischen Innovationen (Silverberg und Verspagen, 2007); eine Übersicht empirischer Beispiele für solche Verteilungen findet sich zudem bei Chen et al. (2024b)\cite{ChenShneer2024}.
 
@@ -122,6 +124,7 @@ Bezeichne mit \(\Delta^n\) das Standardsimplex, also
 \]
 wobei wir die Notation \(\bar{\theta}\) für einen Vektor \((\theta_1, \ldots, \theta_n)\) verwenden. Außerdem steht \([n]\) für die Indexmenge \(\{1, \ldots, n\}\)\cite{ChenShneer2024}.
 \subsection{Stochastische Dominanz}
+\label{sec:stoch_dominanz}
 \begin{definition}
 Eine Zufallsvariable \( X \) heißt stochastisch kleiner als (oder stochastisch dominiert durch) eine Zufallsvariable \( Y \), wenn
 \[
@@ -129,17 +132,711 @@ P(X \leq x) \geq P(Y \leq x) \quad \text{für alle } x \in \mathbb{R}\cite{ChenS
 \]
 \end{definition}
 
+\subsection{Negative Lower Orthant Dependent}
+\begin{definition}
+Ein Zufallsvektor \( X = (X_1, \ldots, X_n) \) heißt \textit{Negative Lower rthant Dependent} (NLOD), wenn
+\[
+\Pr(X_1 \leq x_1, \ldots, X_n \leq x_n) \leq \prod_{i=1}^n \Pr(X_i \leq x_i) \quad \text{für alle } x = (x_1, \ldots, x_n) \in \mathbb{R}^n \cite[p.~53]{neslehova2004}.
+\]
+\end{definition}
+
+
 \chapter{Einige Beobachtungen zur stochastischen Dominanz}
-Im gesamten Papier arbeiten wir mit Zufallsvariablen, die fast sicher nicht-negativ sind.  
-Der Hauptfokus des Papiers liegt auf der Untersuchung von Zufallsvariablen \( X \), für die gilt:  
+Im gesamten Papier wird mit Zufallsvariablen gearbeitet, die fast sicher nicht-negativ sind. Der Hauptfokus des Papiers liegt auf der Untersuchung von Zufallsvariablen \( X \), für die gilt:  
 \begin{equation}
 X \leq_{\text{st}} \theta_1 X_1 + \cdots + \theta_n X_n.
 \tag{1}
 \end{equation}
 
+\noindent Eine Verteilung \( F \) erfüllt Eigenschaft~(1), wenn eine Zufallsvariable \( X \sim F \) diese Eigenschaft erfüllt. \cite{ChenShneer2024}
+
+Da Ungleichung~(1) invariant gegenüber Additionen konstanter Terme ist, betrachten wir ohne Beschränkung der Allgemeinheit nur Zufallsvariablen mit essenziellem Infimum 0. Zudem setzen wir \( n \geq 2 \) und \( \theta_i > 0 \) für alle \( i \in [n] \) voraus. Wir interessieren uns außerdem für Fälle, in denen Ungleichung~(1) strikt erfüllt ist. Im Folgenden formulieren wir einige zentrale Beobachtungen zu dieser Ungleichung. \cite{ChenShneer2024}
+
+
+
+
+
+
+
+
+\begin{proposition}
+Angenommen, die Zufallsvariablen \( X \) und \( Y \) erfüllen Eigenschaft~(1) und sind unabhängig. Dann gelten die folgenden Aussagen:
+\begin{enumerate}[label=\roman*)]
+    \item \( \mathbb{E}(X) = \infty \).\cite{ChenShneer2024}
+    \item Eine Zufallsvariable der Form \( aX + b \) mit \( a \geq 0 \) und \( b \in \mathbb{R} \) erfüllt ebenfalls Eigenschaft~(1).\cite{ChenShneer2024}
+    \item Die Zufallsvariablen \( \max\{X, c\} \) und \( \max\{X, Y\} \) erfüllen Eigenschaft~(1), wobei \( c \geq 0 \) gilt.\cite{ChenShneer2024}
+\item Eine Zufallsvariable \( g(X) \), wobei \( g \) eine konvexe, monoton wachsende Funktion ist, erfüllt die Eigenschaft
+\[
+g(X) \le_{\text{st}} \sum_{i=1}^n \theta_i g(X_i),
+\]
+für alle \( \theta \in \Delta_n \), wobei \( X_1, \dots, X_n \) unabhängige Kopien von \( X \) sind.\\
+Zusätzlich gilt: Wenn die ursprüngliche Ungleichung strikt erfüllt ist, und \( g \) streng monoton wachsend ist, dann gilt auch die obige Ungleichung strikt. \cite{ChenShneer2024}
+
+
+\end{enumerate}
+
+\begin{proof}
+\textit{(i)} Sei \( X \) eine nichtnegative Zufallsvariable. Angenommen, es existiert ein \( \theta \in \Delta_n \), sodass für i.i.d. Kopien \( X_1, \dots, X_n \) von \( X \) gilt:
+\[
+X \leq_{\mathrm{st}} \sum_{i=1}^n \theta_i X_i \tag{2}
+\]
+Dann gilt: \( \mathbb{E}(X) = \infty \). 
+
+\textit{Beweis:} Angenommen, zum Widerspruch, \( \mathbb{E}(X) < \infty \). Dann sind \( X_1, \dots, X_n \) identisch verteilt, unabhängig und haben einen endlichen Erwartungswert. Für \( \theta_1, \ldots, \theta_n > 0 \) mit \( \sum_{i=1}^n \theta_i = 1 \) und identisch verteilten Zufallsvariablen \( X, X_1, \ldots, X_n \) mit endlichem Erwartungswert und beliebiger Abhängigkeitsstruktur gilt:
+
+\[
+X \leq_{\mathrm{st}} \sum_{i=1}^n \theta_i X_i
+\quad \Leftrightarrow \quad
+X_1 = \cdots = X_n \quad \text{fast sicher}. \cite[Proposition~2]{chen2022unexpected}
+\]Dies widerspricht jedoch der Unabhängigkeit und der Tatsache, dass die Zufallsvariablen \( X_1, \dots, X_n \) nicht fast sicher gleich sind.
+ 
+Also muss die Annahme \( \mathbb{E}(X) < \infty \) falsch sein. Daher folgt:
+\[
+\mathbb{E}(X) = \infty.\cite{ChenShneer2024} \quad \blacksquare
+\]
+
+\textit{(ii)} Sei \( Y = aX + b \) mit \( a \geq 0 \), \( b \in \mathbb{R} \), und seien \( X_1, \dots, X_n \) i.i.d. Kopien von \( X \). Setze \( Y_i = aX_i + b \) für \( i = 1, \dots, n \).
+
+Da \( a \geq 0 \) ist, bleibt die stochastische Ordnung unter der Transformation \( x \mapsto ax + b \) erhalten. Da \( X \) außerdem die Ungleichung~(1) erfüllt, folgt:
+\[
+X \leq_{\mathrm{st}} \sum_{i=1}^n \theta_i X_i \quad \Leftrightarrow \quad aX + b \leq_{\mathrm{st}} a\left(\sum_{i=1}^n \theta_i X_i\right) + b
+\]
+Da die Summe linear ist, ergibt sich:
+\[
+aX + b \leq_{\mathrm{st}} \sum_{i=1}^n \theta_i (aX_i + b).
+\]
+Durch Einsetzen von \( Y_i = aX_i + b \) erhalten wir schließlich:
+\[
+Y \leq_{\mathrm{st}} \sum_{i=1}^n \theta_i Y_i.
+\]
+\hfill\ensuremath{\blacksquare}
+
+
+
+\textit{(iii)} Wir zeigen die stärkere Aussage für den Maximalwert zweier Zufallsvariablen.  
+Seien \( X_1, \dots, X_n \) i.i.d. Kopien von \( X \), \( Y_1, \dots, Y_n \) i.i.d. Kopien von \( Y \), wobei \( \{X_i\}_{i=1}^n \) und \( \{Y_i\}_{i=1}^n \) unabhängig sind.
+
+Für \( x \in \mathbb{R} \) und \( \theta \in \Delta_n \) gilt:
+
+\[
+\mathbb{P}(\max\{X, Y\} \le x)
+= \mathbb{P}(X \le x)\, \mathbb{P}(Y \le x)
+\overset{(1)}{\ge} \mathbb{P}\left( \sum_{i=1}^n \theta_i X_i \le x \right)
+\, \mathbb{P}\left( \sum_{i=1}^n \theta_i Y_i \le x \right)
+\]
+
+\[
+= \mathbb{P}\left( \sum_{i=1}^n \theta_i X_i \le x,\ \sum_{i=1}^n \theta_i Y_i \le x \right)
+= \mathbb{P}\left( \max\left\{ \sum_{i=1}^n \theta_i X_i,\ \sum_{i=1}^n \theta_i Y_i \right\} \le x \right)
+\]
+
+\[
+\overset{(2)}{\ge} \mathbb{P}\left( \sum_{i=1}^n \theta_i \max\{X_i, Y_i\} \le x \right)
+\]
+
+Somit gilt:
+\[
+\max\{X, Y\} \le_{\mathrm{st}} \sum_{i=1}^n \theta_i \max\{X_i, Y_i\}.\cite{ChenShneer2024} \quad \blacksquare
+\]
+
+\vspace{1em}
+\noindent\textbf{(1)} Diese Ungleichung gilt nach Ungleichung (1) und der Definition 2.4 der stochastischen Dominanz.
+
+\noindent\textbf{(2)} Da gilt
+\[
+\sum_{i=1}^n \theta_i \max\{X_i, Y_i\} \ge \max\left\{ \sum_{i=1}^n \theta_i X_i,\ \sum_{i=1}^n \theta_i Y_i \right\},
+\]
+impliziert die Bedingung \( \sum_{i=1}^n \theta_i \max\{X_i, Y_i\} \le x \) automatisch die beiden Ungleichungen
+\[
+\sum_{i=1}^n \theta_i X_i \le x \quad \text{und} \quad \sum_{i=1}^n \theta_i Y_i \le x.
+\]
+Daher ist das Ereignis rechts eine Teilmenge des Ereignisses links, und somit ist die Wahrscheinlichkeit rechts kleiner oder gleich der linken.
+
+\textit{(iv)} Da \( g \) konvex und monoton wachsend ist, \textit{und gemäß Theorem 1.A.3 aus \cite{shaked2007stochastic} gilt: Wenn \( X \le_{\mathrm{st}} Y \) und \( g \) eine monoton wachsende Funktion ist, dann gilt auch \( g(X) \le_{\mathrm{st}} g(Y) \).} Wendet man also \( g \) auf die stochastische Ungleichung \( X \le_{\mathrm{st}} \sum_{i=1}^n \theta_i X_i \) (Ungleichung 1) an, so folgt direkt:
+\[
+g(X) \le_{\mathrm{st}} g\left(\sum_{i=1}^n \theta_i X_i\right).
+\]
+Die zweite Ungleichung folgt aus der Konvexität von \( g \), da für konvexe Funktionen stets
+\[
+g\left(\sum_{i=1}^n \theta_i X_i\right) \le \sum_{i=1}^n \theta_i g(X_i) 
+\]
+fast sicher gilt. Daher gilt insgesamt:
+\[
+g(X) \le_{\mathrm{st}} \sum_{i=1}^n \theta_i g(X_i). \cite{ChenShneer2024} \quad \blacksquare
+\]
+
+
+
+
+
+\vspace{1em}
+
+
+\textbf{Bemerkung 1.} Aus den Punkten \textit{(ii)} bis \textit{(iv)} folgt, dass sich aus bekannten Zufallsvariablen, die Ungleichung~(1) erfüllen, systematisch neue Zufallsvariablen konstruieren lassen, die dieselbe Eigenschaft besitzen. So zeigt \textit{(ii)}, dass jede lineare Transformation der Form \( aX + b \), wobei \( a \geq 0 \) und \( b \in \mathbb{R} \), ebenfalls Ungleichung~(1) erfüllt. In \textit{(iii)} wird gezeigt, dass auch der Maximalwert zweier Zufallsvariablen \( \max\{X, Y\} \) die Ungleichung erfüllt, sofern sowohl \( X \) als auch \( Y \) sie erfüllen. Schließlich ergibt sich aus \textit{(iv)}, dass die Anwendung einer konvexen, monoton wachsenden Funktion \( g \) auf eine solche Zufallsvariable ebenfalls zu einer Zufallsvariable führt, die Ungleichung~(1) erfüllt. Damit ermöglichen diese Eigenschaften eine breite Klasse von Konstruktionen neuer Zufallsvariablen mit der gewünschten Stochastik.\cite{ChenShneer2024}
+
+
+\end{proof}
+\end{proposition}
+
+
+
+
 
 \chapter{Super heavy-tailed Verteilungen und stochastische Dominanz}
-In diesem Abschnitt führen wir eine Klasse von Verteilungen ein, die wir als super-schwerschwänzig bezeichnen. Anschließend zeigen wir, dass alle diese Verteilungen die Eigenschaft (1) erfüllen.
+
+In diesem Abschnitt wird eine Klasse von Verteilungen eingeführt, die als \textit{super heavy-tailed} bezeichnet wird. Anschließend wird gezeigt, dass alle diese Verteilungen die Eigenschaft~(1) erfüllen. Außerdem wird untersucht, welche Eigenschaften diese Verteilungen besitzen, und es wird gezeigt, dass viele bekannte Verteilungen mit unendlichem Erwartungswert zu dieser Klasse gehören.
+
+Da man zu \(X\) eine Konstante addieren kann, ohne die Ungleichung zu verändern, kann man ohne Beschränkung der Allgemeinheit annehmen, dass \(\operatorname{ess\,inf} X = 0\). In diesem Fall gilt: Für eine Zufallsvariable \(X \sim F\) mit \(\operatorname{ess\,inf} X = 0\) ist \(F(x) > 0\) für alle \(x > 0\) \cite[Abschnitt~3]{ChenShneer2024}, \cite[Abschnitt~2]{ChenShneer2024}.
+
+\begin{definition}\cite[Definition 2.]{ChenShneer2024}
+Sei \( F \) eine Verteilungsfunktion mit \(\operatorname{ess\,inf} F = 0\) und
+\[
+h_F(x) = -\log F(1/x) \quad \text{für } x \in (0, \infty).
+\]
+Wenn \( h_F \) (streng) subadditiv ist, dann nennen wir \( F \) (streng) \textit{super heavy-tailed}.  
+Eine Zufallsvariable \( X \sim F \) heißt (streng) \textit{super heavy-tailed}, wenn \( F \) (streng) \textit{super heavy-tailed} ist.  .
+\end{definition}
+
+\begin{theorem}\cite[Theorem 1.]{ChenShneer2024}
+Ist eine Zufallsvariable \( X \) \textit{super heavy-tailed}, so erfüllt sie die Ungleichung~(1).  
+Ist \( X \) \textit{streng super heavy-tailed}, so gilt sogar
+\[
+X <_{\mathrm{st}} \sum_{i=1}^{n} \theta_i X_i.
+\]
+
+\textit{Beweis.}
+Sei \( X \sim F \) und \( \bar{\theta} \in \Delta_n \). Für alle \( x > 0 \) gilt:
+\[
+\mathbb{P} \left( \sum_{i=1}^{n} \theta_i X_i \le x \right)
+\le \mathbb{P}(\theta_1 X_1 \le x, \ldots, \theta_n X_n \le x)
+= \prod_{i=1}^{n} F\left( \frac{x}{\theta_i} \right).
+\]
+
+Dabei gilt nach Definition von \( h_F(z) = -\log F(1/z) \) für \( z > 0 \):
+\[
+F\left( \frac{x}{\theta_i} \right) = F\left( \frac{1}{\theta_i / x} \right) = \exp\left( -h_F\left( \frac{\theta_i}{x} \right) \right),
+\]
+daher
+\[
+\prod_{i=1}^{n} F\left( \frac{x}{\theta_i} \right)
+= \prod_{i=1}^{n} \exp\left( -h_F\left( \frac{\theta_i}{x} \right) \right)
+= \exp\left( -\sum_{i=1}^{n} h_F\left( \frac{\theta_i}{x} \right) \right).
+\]
+
+Da \( h_F \) subadditiv ist, d.h.
+\[
+\sum_{i=1}^{n} h_F\left( \frac{\theta_i}{x} \right) \ge h_F\left( \sum_{i=1}^{n} \frac{\theta_i}{x} \right),
+\]
+folgt:
+\[
+\exp\left( -\sum_{i=1}^{n} h_F\left( \frac{\theta_i}{x} \right) \right)
+\le \exp\left( -h_F\left( \sum_{i=1}^{n} \frac{\theta_i}{x} \right) \right).
+\]
+
+Da \( \sum_{i=1}^{n} \theta_i = 1 \), gilt:
+\[
+\sum_{i=1}^{n} \frac{\theta_i}{x} = \frac{1}{x},
+\]
+also
+\[
+\exp\left( -h_F\left( \sum_{i=1}^{n} \frac{\theta_i}{x} \right) \right)
+= \exp\left( -h_F\left( \frac{1}{x} \right) \right) = F(x).
+\]
+
+Damit haben wir gezeigt, dass
+\[
+\mathbb{P} \left( \sum_{i=1}^{n} \theta_i X_i \le x \right) \le F(x) = \mathbb{P}(X \le x)
+\quad \text{für alle } x > 0.
+\]
+Nach der Definition von stochastischer Dominanz (siehe Abschnitt~\ref{sec:stoch_dominanz}) folgt daraus:
+\[
+X \le_{\mathrm{st}} \sum_{i=1}^{n} \theta_i X_i. \quad \blacksquare
+\] 
+
+
+\end{theorem}
+
+
+\begin{proposition} \cite[Proposition 2.]{ChenShneer2024}
+Sei \( X \sim F \) eine \emph{super heavy-tailed} Zufallsvariable. Dann gelten die folgenden Aussagen:
+\begin{enumerate}[label=\roman*)]
+    \item \( F \) ist stetig auf dem Intervall \( [0, \infty) \).
+    \item Für jedes \( \beta > 0 \) ist \( F^\beta \) ebenfalls \emph{super heavy-tailed}.
+    \item Falls zusätzlich eine Zufallsvariable \( Y \sim G \) \emph{super heavy-tailed} und unabhängig von \( X \) ist, dann ist auch \( \max\{X, Y\} \) \emph{super heavy-tailed}. In Bezug auf Verteilungsfunktionen: Wenn \( F \) und \( G \) beide \emph{super heavy-tailed} sind, dann ist auch \( FG \) \emph{super heavy-tailed}.
+    \item Für eine nicht fallende, konvexe und nicht konstante Funktion \( f : \mathbb{R}_+ \to \mathbb{R}_+ \) mit \( f(0) = 0 \) ist auch \( f(X) \) \emph{super heavy-tailed}.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+\begin{enumerate}[label=\roman*)]
+    \item Nach \cite[Remark~1]{matkowski1993subadditive} ist eine Funktion \( f : (0, \infty) \to \mathbb{R}_+ \) stetig auf \( (0, \infty) \), wenn sie subadditiv, monoton wachsend ist und die Bedingung \( \lim_{t \to 0} f(t) = 0 \) erfüllt. 
+
+    Da \( h_F(x) := -\log F(1/x) \) nach Definition~4.1 subadditiv ist (weil \( F \) super heavy-tailed ist), außerdem streng monoton wachsend ist (da \( F \) als Verteilungsfunktion monoton ist und die Abbildung \( x \mapsto 1/x \) streng fallend ist), und zudem
+    \[
+    \lim_{x \downarrow 0} h_F(x) = \lim_{x \downarrow 0} -\log F(1/x) = -\log 1 = 0
+    \]
+    gilt (weil \( 1/x \to \infty \) und damit \( F(1/x) \to 1 \)), sind alle Voraussetzungen von \cite[Remark~1]{matkowski1993subadditive} erfüllt. Daher ist \( h_F \) stetig auf \( (0, \infty) \). \cite[Proposition 2, Proof i]{ChenShneer2024}
+
+    \item Sei \( F \) eine super heavy-tailed Verteilungsfunktion mit zugehöriger Funktion \\ \( h_F(x) = -\log F(1/x) \).\\
+    Betrachte nun \( G(x) := F(x)^\beta \) für ein beliebiges \( \beta > 0 \). Dann gilt:
+    \[
+    h_G(x) = -\log G(1/x) 
+    = -\log \left( F(1/x)^\beta \right) 
+    = -\beta \log F(1/x) 
+    = \beta h_F(x).
+    \]
+    Da \( h_F \) subadditiv und monoton wachsend ist, folgt sofort, dass auch \( h_G(x) = \beta h_F(x) \) subadditiv und monoton wachsend ist (da Multiplikation mit \( \beta > 0 \) diese Eigenschaften erhält).\\
+    Somit ist \( G \) ebenfalls super heavy-tailed.
+
+        \item
+    Seien \( X \sim F \) und \( Y \sim G \) zwei unabhängige, super heavy-tailed Zufallsvariablen. Dann ist auch \( \max\{X, Y\} \) super heavy-tailed.
+
+    Der Verteilungsfunktion von \( \max\{X, Y\} \) ist
+    \[
+    H(x) := \mathbb{P}(\max\{X, Y\} \le x) = \mathbb{P}(X \le x, Y \le x) = F(x) G(x).
+    \]
+
+    Setze
+    \[
+    h_H(x) := -\log H(1/x) = -\log (F(1/x) G(1/x)) = -\log F(1/x) - \log G(1/x) = h_F(x) + h_G(x).
+    \]
+
+    Da \( h_F \) und \( h_G \) beide subadditiv und monoton wachsend sind (weil \( F \) und \( G \) super heavy-tailed sind), folgt:
+    \begin{itemize}
+        \item Die Summe zweier subadditiver Funktionen ist wieder subadditiv.
+        \item Die Summe zweier monoton wachsender Funktionen ist ebenfalls monoton wachsend.
+    \end{itemize}
+
+    Daher ist auch \( h_H \) subadditiv und monoton wachsend, also ist \( H = FG \) super heavy-tailed.
+
+    \item Für \( y \geq 0 \) sei die rechtsstetige, verallgemeinerte Inverse der Funktion \( f \) definiert durch
+    \[
+    f^{-1}_+(y) := \inf \{ x \geq 0 : f(x) > y \}.
+    \]
+    Da der Ausdruck \( f^{-1}_+(y) \) auch dann wohldefiniert sein soll, wenn kein \( x \) existiert mit \( f(x) > y \), setzt man per Konvention \( \inf \emptyset := \infty \). In diesem Fall ist die Menge leer, ein kleinstes Element existiert nicht, und daher wird das Infimum als \( \infty \) definiert.
+
+    Da \( f \) streng wachsend ist, ist auch \( f^{-1}_+ \) streng wachsend: Für \( y_1 < y_2 \) gilt \( f^{-1}_+(y_1) < f^{-1}_+(y_2) \).  
+    Da \( f \) konvex ist, ist \( f^{-1}_+ \) konkav – dies folgt allgemein daraus, dass die Inverse einer konvexen, streng wachsenden Funktion stets konkav ist.  
+    Da \( f : \mathbb{R}_+ \to \mathbb{R}_+ \) definiert ist, gilt direkt \( f^{-1}_+(0) \geq 0 \).  
+    Da \( f_+^{-1} \) konkav ist und \( f_+^{-1}(0) \geq 0 \), folgt unmittelbar:
+    \[
+    f_+^{-1}(t x) \geq t \cdot f_+^{-1}(x)
+    \quad \text{für alle } x > 0 \text{ und } t \in (0, 1],
+    \]
+    was eine klassische Eigenschaft konkaver Funktionen mit nichtnegativem Funktionswert bei Null ist.
+
+    \medskip
+
+    Nun zeigen wir eine wichtige Ungleichung, die später für die Subadditivität gebraucht wird. Für \( a, b > 0 \) gilt:
+
+    \begin{align*}
+    f_+^{-1}\left( \frac{ab}{a + b} \right) \cdot (f_+^{-1}(a) + f_+^{-1}(b))
+    &\geq \frac{a}{a + b} \cdot f_+^{-1}(b) \cdot f_+^{-1}(a) + \frac{b}{a + b} \cdot f_+^{-1}(a) \cdot f_+^{-1}(b) \\
+    &= f_+^{-1}(a) \cdot f_+^{-1}(b) \cdot \left( \frac{a + b}{a + b} \right) \\
+    &= f_+^{-1}(a) \cdot f_+^{-1}(b).
+    \end{align*}
+
+    Wir teilen beide Seiten durch das Produkt \( f_+^{-1}(a) \cdot f_+^{-1}(b) > 0 \), um zu erhalten:
+    \[
+    \frac{f_+^{-1}\left( \frac{ab}{a + b} \right) \cdot (f_+^{-1}(a) + f_+^{-1}(b))}{f_+^{-1}(a) \cdot f_+^{-1}(b)} \geq 1.
+    \]
+
+    Multiplizieren wir beide Seiten mit dem positiven Nenner \( f_+^{-1}(a) \cdot f_+^{-1}(b) \), so ergibt sich:
+    \[
+    f_+^{-1}\left( \frac{ab}{a + b} \right) \cdot \left( f_+^{-1}(a) + f_+^{-1}(b) \right) \geq f_+^{-1}(a) \cdot f_+^{-1}(b).
+    \]
+
+    Nun teilen wir beide Seiten durch den positiven Faktor \( f_+^{-1}(a) + f_+^{-1}(b) \):
+    \[
+    f_+^{-1}\left( \frac{ab}{a + b} \right) \geq \frac{f_+^{-1}(a) \cdot f_+^{-1}(b)}{f_+^{-1}(a) + f_+^{-1}(b)}.
+    \]
+
+    Da alle Terme positiv sind, dürfen wir reziproke Werte bilden:
+    \[
+    \left( f_+^{-1}\left( \frac{ab}{a + b} \right) \right)^{-1} \leq \frac{f_+^{-1}(a) + f_+^{-1}(b)}{f_+^{-1}(a) \cdot f_+^{-1}(b)}.
+    \]
+
+    Schließlich zerlegen wir den rechten Bruch:
+    \[
+    \frac{f_+^{-1}(a) + f_+^{-1}(b)}{f_+^{-1}(a) \cdot f_+^{-1}(b)} = \frac{1}{f_+^{-1}(b)} + \frac{1}{f_+^{-1}(a)}.
+    \]
+
+    Daher folgt insgesamt:
+    \[
+    \left( f_+^{-1}\left( \frac{ab}{a + b} \right) \right)^{-1}
+    \leq \left( f_+^{-1}(a) \right)^{-1} + \left( f_+^{-1}(b) \right)^{-1},
+    \]
+    
+    Dies ist die Ungleichung~(3), die wir später verwenden werden.
+
+\end{enumerate}
+\end{proof}
+
+    \begin{proposition}
+Sei \( \bar{\theta} \in \Delta_n \). Wenn die Verteilungsfunktionen \( F_1, \dots, F_n \) super heavy-tailed sind und
+\[
+F_1 \leq_{\mathrm{st}} F_2 \leq_{\mathrm{st}} \cdots \leq_{\mathrm{st}} F_n,
+\]
+dann ist auch die Verteilungsfunktion
+\[
+G := \sum_{i=1}^n \theta_i F_i
+\]
+super heavy-tailed.  \cite[Proposition 3.]{ChenShneer2024}
+
+\begin{proof}[Beweis zu Proposition~3]
+Wir führen den Beweis durch vollständige Induktion über die Anzahl \( n \) der Verteilungen. Der Induktionsanfang ist der Fall \( n = 2 \).
+
+Um zu zeigen, dass \( G := \sum_{i=1}^n \theta_i F_i \) super heavy-tailed ist, genügt es zu zeigen, dass
+\[
+h_G(x) := -\log G(1/x)
+\]
+subadditiv ist, also
+\[
+h_G(x + y) \leq h_G(x) + h_G(y) \quad \text{für alle } x, y > 0.
+\]
+
+
+\medskip
+
+Dazu verwenden wir die Substitution
+\[
+z := \frac{xy}{x + y} \quad \Rightarrow \quad \frac{1}{z} = \frac{1}{x} + \frac{1}{y}.
+\]
+Somit gilt:
+\[
+h_G\left( \frac{1}{z} \right) = h_G\left( \frac{1}{x} + \frac{1}{y} \right),
+\]
+und die Subadditivität ist äquivalent zu
+\[
+h_G\left( \frac{1}{x} + \frac{1}{y} \right) \leq h_G\left( \frac{1}{x} \right) + h_G\left( \frac{1}{y} \right).
+\]
+
+Setzen wir die Definition von \( h_G \) ein:
+\[
+- \log G(z) \leq - \log G(x) - \log G(y).
+\]
+Multiplizieren wir beide Seiten mit \( -1 \), so ergibt sich:
+\[
+\log G(z) \geq \log G(x) + \log G(y),
+\]
+und Anwenden der Exponentialfunktion ergibt:
+\[
+G\left( \frac{xy}{x + y} \right) \geq G(x) \cdot G(y).
+\tag{4}
+\]
+
+\medskip
+
+Dies ist genau die Ungleichung, die in Proposition~3 gezeigt werden soll. Sie ist also äquivalent zur Subadditivität von \( h_G(x) = -\log G(1/x) \), was per Definition 4.1 bedeutet, dass \( G \) super heavy-tailed ist.
+
+Setze \( z := \frac{xy}{x + y} \). Dann gilt:
+
+\[
+G(z) = \theta_1 F_1(z) + \theta_2 F_2(z),
+\]
+und somit:
+\[
+G(z) - G(x) G(y)
+= \theta_1 F_1\left( \frac{xy}{x + y} \right)
++ \theta_2 F_2\left( \frac{xy}{x + y} \right)
+- G(x) G(y).
+\]
+
+\textit{Diese Umformung ergibt sich direkt aus der Definition von \( G \) als konvexe Linearkombination. Wir setzen nur den Ausdruck für \( G(z) \) explizit ein, um später die super heavy-tailed Eigenschaft der \( F_i \) gezielt nutzen zu können.}
+
+Da \( F_1 \) und \( F_2 \) super heavy-tailed sind, ist nach Definition \( h_{F_i}(x) := -\log F_i(1/x) \) subadditiv, d.\,h.
+\[
+h_{F_i}(x + y) \leq h_{F_i}(x) + h_{F_i}(y) \quad \text{für alle } x, y > 0.
+\]
+Setze \( z := \frac{xy}{x + y} \), dann gilt \( \frac{1}{z} = \frac{1}{x} + \frac{1}{y} \), also:
+\[
+h_{F_i}\left( \frac{1}{z} \right)
+= h_{F_i}\left( \frac{1}{x} + \frac{1}{y} \right)
+\leq h_{F_i}\left( \frac{1}{x} \right) + h_{F_i}\left( \frac{1}{y} \right)
+= -\log F_i(x) - \log F_i(y).
+\]
+Somit folgt:
+\[
+-\log F_i\left( \frac{xy}{x + y} \right) \leq -\log(F_i(x) F_i(y)),
+\]
+\[
+\Rightarrow \quad F_i\left( \frac{xy}{x + y} \right) \geq F_i(x) F_i(y).
+\]
+
+Anwenden dieser Ungleichung auf beide Terme ergibt:
+\[
+G\left( \frac{xy}{x + y} \right) \geq \theta_1 F_1(x) F_1(y) + \theta_2 F_2(x) F_2(y),
+\]
+und daher:
+\[
+G\left( \frac{xy}{x + y} \right) - G(x) G(y)
+\geq \theta_1 F_1(x) F_1(y) + \theta_2 F_2(x) F_2(y) - G(x) G(y).
+\]
+
+Wir schreiben den Ausdruck \( G(x)G(y) \) explizit aus. Da
+\[
+G(x) = \theta_1 F_1(x) + \theta_2 F_2(x), \quad
+G(y) = \theta_1 F_1(y) + \theta_2 F_2(y),
+\]
+ergibt sich:
+\begin{align*}
+G(x)G(y)
+&= (\theta_1 F_1(x) + \theta_2 F_2(x)) \cdot (\theta_1 F_1(y) + \theta_2 F_2(y)) \\
+&= \theta_1^2 F_1(x) F_1(y) + \theta_1 \theta_2 F_1(x) F_2(y) \\
+&\quad + \theta_2 \theta_1 F_2(x) F_1(y) + \theta_2^2 F_2(x) F_2(y).
+\end{align*}
+
+Daher ergibt sich für den Ausdruck
+\[
+\theta_1 F_1(x) F_1(y) + \theta_2 F_2(x) F_2(y) - G(x)G(y)
+\]
+folgendes:
+\begin{align*}
+&= \theta_1 F_1(x) F_1(y) + \theta_2 F_2(x) F_2(y) \\
+&\quad - \big( \theta_1^2 F_1(x) F_1(y) + \theta_1 \theta_2 F_1(x) F_2(y) + \theta_2 \theta_1 F_2(x) F_1(y) + \theta_2^2 F_2(x) F_2(y) \big) \\
+&= \theta_1(1 - \theta_1) F_1(x) F_1(y) + \theta_2(1 - \theta_2) F_2(x) F_2(y) \\
+&\quad - \theta_1 \theta_2 \left( F_1(x) F_2(y) + F_2(x) F_1(y) \right).
+\end{align*}
+
+Wenn wir den Ausdruck umstellen, erhalten wir:
+\[
+\theta_1 F_1(x) F_1(y) + \theta_2 F_2(x) F_2(y) - G(x)G(y)
+= \theta_1 \theta_2 (F_1(x) - F_2(x))(F_1(y) - F_2(y)).
+\]
+Da nach Definition \( (\theta_1, \theta_2) \in \Delta_2 \) (siehe Abschnitt~2.3 zum Standard-Simplex), gilt \( \theta_1, \theta_2 \geq 0 \) mit \( \theta_1 + \theta_2 = 1 \).  
+Da wir nur nichttriviale Mischungen betrachten, nehmen wir zusätzlich an, dass \( \theta_1, \theta_2 > 0 \) sind.
+
+Außerdem gilt \( F_1(x) \leq F_2(x) \) und \( F_1(y) \leq F_2(y) \), sodass beide Differenzen \( \leq 0 \) sind.  
+Das Produkt ist daher \( \geq 0 \).
+
+
+Also gilt:
+\[
+G\left( \frac{xy}{x + y} \right) \geq G(x) G(y),
+\]
+was zeigt, dass \( h_G(x) := -\log G(1/x) \) subadditiv ist.  
+Damit gilt Ungleichung~(4) für \( n = 2 \), und der Induktionsanfang ist gezeigt.
+
+\medskip
+
+Wir führen nun den Induktionsschritt durch:  
+Angenommen, Ungleichung~(4) gilt für \( n = k - 1 \), wobei \( k \geq 3 \) eine ganze Zahl ist.  
+Wir zeigen, dass sie dann auch für \( n = k \) gilt.
+
+Die Verteilungsfunktion \( G \) ist durch
+\[
+G(x) = \sum_{i=1}^{k} \theta_i F_i(x)
+\]
+gegeben.
+
+Dann gilt:
+\[
+G\left( \frac{xy}{x + y} \right) - G(x) G(y)
+= \sum_{i=1}^{k} \theta_i F_i\left( \frac{xy}{x + y} \right) - G(x) G(y).
+\]
+
+Wir trennen den letzten Summanden ab:
+\[
+= \sum_{i=1}^{k-1} \theta_i F_i\left( \frac{xy}{x + y} \right) + \theta_k F_k\left( \frac{xy}{x + y} \right) - G(x) G(y).
+\]
+
+Nun setzen wir \( n := k \), und schreiben den Ausdruck äquivalent mit Index \( n \):
+\[
+= \sum_{i=1}^{n-1} \theta_i F_i\left( \frac{xy}{x + y} \right) + \theta_n F_n\left( \frac{xy}{x + y} \right) - G(x) G(y).
+\]
+
+Nun fassen wir die ersten \( n - 1 \) Terme als Linearkombination mit Gesamtgewicht \( 1 - \theta_n \) zusammen.  
+Dazu faktorisieren wir \( (1 - \theta_n) \) aus der Summe:
+
+\[
+= (1 - \theta_n) \sum_{i=1}^{n-1} \frac{\theta_i}{1 - \theta_n} F_i\left( \frac{xy}{x + y} \right)
++ \theta_n F_n\left( \frac{xy}{x + y} \right) - G(x) G(y).
+\]
+
+Da die normierte Mischung \( H(x) := \sum_{i=1}^{n-1} \frac{\theta_i}{1 - \theta_n} F_i(x) \)
+können wir gemäß Ungleichung~(4) (nach Induktionsvoraussetzung) direkt schreiben:
+
+\begin{align*}
+&= (1 - \theta_n) \sum_{i=1}^{k-1} \frac{\theta_i}{1 - \theta_n} F_i\left( \frac{xy}{x + y} \right)
++ \theta_n F_n\left( \frac{xy}{x + y} \right) - G(x) G(y) \\
+&\geq (1 - \theta_n)
+\left( \sum_{i=1}^{k-1} \frac{\theta_i}{1 - \theta_n} F_i(x) \right)
+\left( \sum_{i=1}^{k-1} \frac{\theta_i}{1 - \theta_n} F_i(y) \right)
++ \theta_n F_n\left( \frac{xy}{x + y} \right) - G(x) G(y)
+\end{align*}
+
+Damit gilt die gesamte Ungleichung aus der obigen Zeile.
+
+Wir setzen nun explizit
+\[
+a := \sum_{i=1}^{n-1} \theta_i F_i(x), \quad
+b := \sum_{i=1}^{n-1} \theta_i F_i(y),
+\]
+woraus folgt:
+\[
+\sum_{i=1}^{n-1} \frac{\theta_i}{1 - \theta_n} F_i(x) = \frac{a}{1 - \theta_n}, \quad
+\sum_{i=1}^{n-1} \frac{\theta_i}{1 - \theta_n} F_i(y) = \frac{b}{1 - \theta_n}.
+\]
+
+Wir setzen diese Ausdrücke nun in die Ungleichung ein und da \( F_n \) super heavy-tailed ist, gilt analog zu Ungleichung~(4):
+\[
+F_n\left( \frac{xy}{x + y} \right) \geq F_n(x) F_n(y),
+\]
+und somit gilt folgende Abschätzung:
+
+\begin{align*}
+&(1 - \theta_n)
+\left( \sum_{i=1}^{n-1} \frac{\theta_i}{1 - \theta_n} F_i(x) \right)
+\left( \sum_{i=1}^{n-1} \frac{\theta_i}{1 - \theta_n} F_i(y) \right)
++ \theta_n F_n\left( \frac{xy}{x + y} \right) - G(x) G(y) \\
+&\geq \frac{a}{1 - \theta_n} \cdot \frac{b}{1 - \theta_n} \cdot (1 - \theta_n)
++ \theta_n F_n(x) F_n(y) - G(x) G(y)
+\end{align*}
+
+
+
+
+Die letzte Klammer entspricht genau \( G(x) \cdot G(y) \), denn es gilt:
+\[
+G(x) = a + \theta_n F_n(x), \quad G(y) = b + \theta_n F_n(y).
+\]
+
+Dies folgt direkt aus der Definition der Mischverteilung:
+\[
+G(x) = \sum_{i=1}^n \theta_i F_i(x) = \sum_{i=1}^{n-1} \theta_i F_i(x) + \theta_n F_n(x).
+\]
+
+Daraus folgt insgesamt:
+\[
+G\left( \frac{xy}{x + y} \right) - G(x) G(y)
+\geq \frac{ab}{1 - \theta_n} + \theta_n F_n(x) F_n(y) - (a + \theta_n F_n(x))(b + \theta_n F_n(y)).
+\]
+
+Dabei wurde verwendet:
+\begin{align*}
+(a + \theta_n F_n(x))(b + \theta_n F_n(y)) 
+&= ab + a \theta_n F_n(y) + b \theta_n F_n(x) + \theta_n^2 F_n(x) F_n(y) \\
+\\
+\Rightarrow\quad
+&\text{Daher gilt:} \\
+&\frac{ab}{1 - \theta_n}
++ \theta_n F_n(x) F_n(y)
+- (a + \theta_n F_n(x))(b + \theta_n F_n(y)) \\
+&= \frac{ab}{1 - \theta_n}
++ \theta_n F_n(x) F_n(y) \\
+&\quad - \left( ab + a \theta_n F_n(y) + b \theta_n F_n(x) + \theta_n^2 F_n(x) F_n(y) \right) \\
+\\
+&= \left( \frac{ab}{1 - \theta_n} - ab \right)
++ \left( \theta_n - \theta_n^2 \right) F_n(x) F_n(y) \\
+&\quad - a \theta_n F_n(y)
+- b \theta_n F_n(x) \\
+\\
+&= \frac{ab \theta_n}{1 - \theta_n}
++ (\theta_n - \theta_n^2) F_n(x) F_n(y)
+- a \theta_n F_n(y)
+- b \theta_n F_n(x)
+\end{align*}
+
+Es wird definiert:
+\[
+c := \frac{a}{F_n(x)(1 - \theta_n)}, \quad
+d := \frac{b}{F_n(y)(1 - \theta_n)}.
+\]
+
+Dann gilt:
+\[
+a = c \cdot F_n(x)(1 - \theta_n), \quad
+b = d \cdot F_n(y)(1 - \theta_n).
+\]
+
+Diese Ausdrücke werden nun in die vorherige Gleichung eingesetzt:
+\begin{align*}
+&\frac{ab\theta_n}{1 - \theta_n}
++ (\theta_n - \theta_n^2) F_n(x) F_n(y)
+- a \theta_n F_n(y)
+- b \theta_n F_n(x) \\
+%
+&= \frac{c d (1 - \theta_n)^2 F_n(x) F_n(y) \cdot \theta_n}{1 - \theta_n}
++ \theta_n (1 - \theta_n) F_n(x) F_n(y) \\
+&\quad - c (1 - \theta_n) \cdot \theta_n F_n(x) F_n(y)
+- d (1 - \theta_n) \cdot \theta_n F_n(x) F_n(y)
+\end{align*}
+
+Nun fassen wir zusammen:
+\begin{align*}
+&= \theta_n (1 - \theta_n) F_n(x) F_n(y)
+\left( cd + 1 - c - d \right)
+\end{align*}
+
+Da \( F_1 \leq_{\mathrm{st}} \cdots \leq_{\mathrm{st}} F_k \), gilt insbesondere:
+\[
+F_k(x) \leq \sum_{i=1}^{k-1} \frac{\theta_i}{1 - \theta_n} F_i(x),
+\quad
+F_k(y) \leq \sum_{i=1}^{k-1} \frac{\theta_i}{1 - \theta_n} F_i(y).
+\]
+
+Multiplizieren wir beide Seiten mit \( (1 - \theta_n) \), erhalten wir:
+\[
+(1 - \theta_n) F_n(x) \leq \sum_{i=1}^{k-1} \theta_i F_i(x) = a,
+\quad
+(1 - \theta_n) F_n(y) \leq \sum_{i=1}^{k-1} \theta_i F_i(y) = b.
+\]
+
+Daraus folgt durch Umstellen:
+\[
+\frac{a}{(1 - \theta_n) F_n(x)} \geq 1,
+\quad
+\frac{b}{(1 - \theta_n) F_n(y)} \geq 1,
+\]
+also
+\[
+c := \frac{a}{(1 - \theta_n) F_n(x)} \geq 1,
+\quad
+d := \frac{b}{(1 - \theta_n) F_n(y)} \geq 1.
+\]
+
+Da \( c, d \geq 1 \), folgt
+\[
+cd + 1 - c - d \geq 0,
+\]
+die für alle \( c, d \geq 1 \) gilt.
+
+Daher ist der gesamte Ausdruck
+\[
+\theta_n (1 - \theta_n) F_n(x) F_n(y) (cd + 1 - c - d) \geq 0,
+\]
+und somit
+\[
+G\left( \frac{xy}{x + y} \right) \geq G(x) G(y).
+\]
+
+Der Beweis ist damit vollständig durch vollständige Induktion abgeschlossen. \cite{ChenShneer2024}
+
+
+
+\end{proof}
+\end{proposition}
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -154,6 +851,6 @@ In diesem Abschnitt führen wir eine Klasse von Verteilungen ein, die wir als su
 
 \backmatter
 \addcontentsline{toc}{chapter}{Literaturverzeichnis}
-\bibliographystyle{plain}
+\bibliographystyle{unsrt}
 \bibliography{literatur}
 \end{document}
